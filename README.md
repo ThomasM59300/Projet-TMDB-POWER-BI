@@ -47,4 +47,18 @@ Le rapport est disponible au format pbix en téléchargement, mais pour une meil
 - `mesures_dax.md` : fichier listant les principales mesures DAX utilisées.
 - `requetes_sql.md` : fichier listant les principales requêtes SQL pour récupérer des données transformées.
 - `modele.png` : aperçu du modèle de données.
-  
+
+
+
+--- 
+
+## Mise à jour [25/06]
+
+- Ajout d’un dossier `DAX/` contenant mes exercices de pratique du langage DAX sur les données TMDb, via l'éditeur de requête DAX.
+- Documentation des principales mesures DAX utilisées
+- Ajout de captures d'écran pour les résultats intéressants.
+
+> Ce projet est en cours d’amélioration continue, notamment autour de l’apprentissage avancé de DAX et de Power BI.
+
+
+> D’autres ajouts sont à venir, notamment des exercices pratiques en langage M pour approfondir l’utilisation de Power Query.
