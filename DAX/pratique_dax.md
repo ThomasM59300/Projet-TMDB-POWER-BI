@@ -4,6 +4,8 @@ Ce document rassemble une série de requêtes DAX réalisées dans Power BI, à 
 
 Pour rappel, les tables de données et les relations entres elles sont comme ci-dessous : 
 
+![Schéma](Captures/Schema.png)
+
 --- 
 
 ## 1 - Titres des films sortis après 2015
@@ -68,7 +70,7 @@ EVALUATE
 
 
 
-## Nombre de genres par film (uniquement ceux > 3)
+## 4 - Nombre de genres par film (uniquement ceux > 3)
 
 ```dax
 EVALUATE
@@ -101,6 +103,10 @@ EVALUATE
 ORDER BY [Nombre de genre] DESC
 ```
 
+Résultat : 
+
+![Numéro 4](Captures/dax_4.png)
+
 ---
 
 
@@ -125,6 +131,10 @@ EVALUATE
 		"Film produit en France", [Titre]
 	))
 ```
+
+Résultat : 
+
+![Numéro 5](Captures/dax_5.png)
 
 ---
 
@@ -183,6 +193,10 @@ EVALUATE
 	)
 ```
 
+Résultat :
+
+![Numéro 7](Captures/dax_7.png)
+
 ---
 
 
@@ -195,12 +209,26 @@ EVALUATE
 		FILTER(
 			ADDCOLUMNS(
 				acteurs,
-				"Genre", IF(acteurs[sexe] = 1, "Femme", "Homme"),
-				"Popularité", LOOKUPVALUE(films_acteurs[popularite], films_acteurs[acteur_id], acteurs[id])
+				"Genre", IF(
+					acteurs[sexe] = 1,
+					"Femme",
+					"Homme"
+				),
+				"Popularité", LOOKUPVALUE(
+					films_acteurs[popularite],
+					films_acteurs[acteur_id],
+					acteurs[id]
+				)
 			),
+
 			acteurs[sexe] = 1 &&
-			LOOKUPVALUE(films_acteurs[popularite], films_acteurs[acteur_id], acteurs[id]) > 5
+			LOOKUPVALUE(
+				films_acteurs[popularite],
+				films_acteurs[acteur_id],
+				acteurs[id]
+			) > 5
 		),
+
 		"Nom", acteurs[nom]
 	)
 ```
@@ -235,6 +263,10 @@ EVALUATE
 	)
 ORDER BY [Popularité] DESC, [Note] DESC
 ```
+
+Résultat :
+
+![Numéro 9](Captures/dax_9.png)
 
 ---
 
@@ -273,6 +305,10 @@ EVALUATE
 	)
 	ORDER BY [Nombre de films] DESC
 ```
+
+Résultat :
+
+![Numéro 10](Captures/dax_10.png)
 
 ---
 
@@ -445,7 +481,17 @@ RETURN
 
 > Alors évidemment on aurait tout simplement pu faire un nuage de point directement avec les 25000 films, mais le but ici est de pratiquer DAX.
 
-Voici une comparaison : 
+Résultat : 
+
+> Interprétation : 122 films ont un revenu qui dépasse 20 fois leur budget initial, et leur note moyenne est 6.72
+
+![Numéro 13](Captures/dax_13.png)
+
+Comparaison : 
+
+> Voici une comparaison entre l'agrégation via la mesure ci-dessus, et en bas les données brutes sans traitement
+
+![Comparaison](Captures/comparaison.png)
 
 ---
 
@@ -607,7 +653,7 @@ EVALUATE
 ---
 
 
-## 17 - Les paires d'acteurs qui ont le plus joué ensemble 
+## 16 - Les paires d'acteurs qui ont le plus joué ensemble 
 
 ```dax
 EVALUATE
@@ -671,3 +717,6 @@ EVALUATE
 		"Nombre de collaboration", [Nb collab])
 ORDER BY [Nombre de collaboration] DESC
 ```
+Résultat : 
+
+![Numéro 16](Captures/dax_16.png)
